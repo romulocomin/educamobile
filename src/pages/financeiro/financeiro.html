@@ -1,0 +1,85 @@
+<ion-header>
+
+  <custom-header [title]="'Financeiro'"></custom-header>
+
+</ion-header>
+
+
+<ion-content padding="true">
+  <ion-item>
+      <ion-label>Selecione o periodo</ion-label>
+      <ion-select block  placeholder="Periodo" [(ngModel)]="selected"  (ionChange)="onItemSelection(selected)">
+              <ion-option *ngFor="let item of users" [value]="item.id">{{item.curso}}</ion-option>
+      </ion-select>
+  </ion-item>    
+      <ion-segment  [(ngModel)]="boleto">
+        <ion-segment-button value="abertos">
+          Abertos
+        </ion-segment-button>
+        <ion-segment-button value="vencidos">
+          Vencidos
+        </ion-segment-button>
+        <ion-segment-button value="todos">
+          Todos
+        </ion-segment-button>
+      </ion-segment>
+    
+  
+  
+  
+    <div no-bounce [ngSwitch]="boleto">
+      <ion-list *ngSwitchCase="'abertos'"  ngSelected="selected" >
+      
+      <ng-container *ngFor="let bolet of boletos"  >
+        <ng-container *ngIf= "bolet.datavencimento > '02/07/2012' "  >
+         <ion-item> 
+            <ion-grid>
+              <ion-row>  
+                <ion-col>
+                     <p>Data</p>
+                    <p >{{bolet.datavencimento}}</p>
+                    <p>DataHoje</p>
+                    <h3>{{today |date: 'dd/MM/yyyy' }}</h3>
+                </ion-col>
+                <ion-col>
+                    <p>valor</p>
+                    <p >{{bolet.valor}}</p> 
+                </ion-col>
+                <ion-col>
+<button ion-button block icon-end outline  (click)="getImpBoleto(bolet.codcoligada, bolet.idboleto)"  value={{bolet.idboleto}}>BOLETO</button>
+                </ion-col>
+              </ion-row>  
+            </ion-grid>
+          </ion-item>
+        </ng-container>
+      </ng-container>  
+      </ion-list>
+        
+      <ion-list *ngSwitchCase="'vencidos'">
+        <ion-item>
+       
+          <h2>Luna</h2>
+        </ion-item>
+        
+      </ion-list>
+  
+      <ion-list *ngSwitchCase="'todos'">
+        <ion-item>
+          
+          <h2>Daffy</h2>
+        </ion-item>
+        <ion-item>
+          
+          <h2>Huey</h2>
+        </ion-item>
+        <ion-item>
+         
+          <h2>Dewey</h2>
+        </ion-item>
+        <ion-item>
+          
+          <h2>Louie</h2>
+        </ion-item>
+      </ion-list>
+    </div>
+</ion-content>

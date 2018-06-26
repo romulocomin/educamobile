@@ -1,19 +1,42 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" id="menuStudent" persistent="true" enable="true">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
+      
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
+      <ion-list-header>
+          <ion-item no-lines>
+            <ion-avatar style="zoom:2.0;" item-start>
+              <img  src="http://portal.estudeseg.com.br/EducaMobile/Content/images/foto.jpg">
+            </ion-avatar>
+            
+          </ion-item>
+          <p id="nameProfile">{{profileData.nome}}</p>
+        </ion-list-header>
+  
+        <ion-item-divider></ion-item-divider>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+      
     </ion-list>
   </ion-content>
 
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"  >
+   
+</ion-nav>
+<ion-footer>
+  <ion-toolbar>
+      
+
+    <ion-title >Footer</ion-title>
+    <p id="bb"></p>
+  </ion-toolbar>
+</ion-footer>

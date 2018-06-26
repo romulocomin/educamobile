@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page5">
+  
+    <ion-list id="login-list3">
+      <ion-item id="login-input1">
+        <ion-label>
+          Matricula
+        </ion-label>
+        <ion-input type="text" placeholder="" value="104011"[(ngModel)]="userData.codusuario" ></ion-input>
+      </ion-item>
+      <ion-item id="login-input2">
+        <ion-label>
+          Senha
+        </ion-label>
+        <ion-input type="password" value="123456" placeholder=""[(ngModel)]="userData.senha"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="spacer" style="height:40px;" id="login-spacer1"></div>
+    <button id="login-button1" ion-button color="stable" block (click)="logina()">
+      Login   
+    </button>
+    
+  
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-item-divider></ion-item-divider>
+
+
+<button  ion-button clear text-center (click)="toggle()">
+  <ion-icon name="ios-add-circle-outline">  Legenda</ion-icon>
+</button>
+
+<ion-col [hidden]="!visible" class="accountBalance animated slideInUp">
+  <ion-list>
+    <ion-item>
+
+        <h3 padding><ion-icon name="radio-button-on" color="primary"></ion-icon> Concluido</h3>
+      
+    </ion-item>
+    <ion-item>
+        <h3 padding><ion-icon name="radio-button-on" color="danger"></ion-icon> Pendente</h3>
+      
+    </ion-item>
+    <ion-item>
+        <h3 padding><ion-icon name="radio-button-on" color="secondary"></ion-icon> Não concluido</h3>
+      
+    </ion-item>
+    <ion-item>
+         <h3 padding>*  Equivalente</h3>
+      
+    </ion-item>
+  </ion-list>
+
+</ion-col>
+
+<ion-item-divider></ion-item-divider>

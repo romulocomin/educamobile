@@ -1,0 +1,23 @@
+<ion-header>
+
+  <custom-header [title]="'Mensagens'"></custom-header>
+
+</ion-header>
+
+
+<ion-content padding>
+ 
+
+<p>novalista</p>
+<ion-list>
+
+  <button ion-item
+          *ngFor="let message of mensagens"
+          (click)="contactTapped($event, message)">
+
+  <ion-label>{{message.id}}</ion-label>
+  
+  </button>
+
+</ion-list>
+</ion-content>
