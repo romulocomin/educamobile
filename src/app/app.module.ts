@@ -1,4 +1,3 @@
-
 import { MessageDetailsPage } from './../pages/message-details/message-details';
 import { OneSignal } from '@ionic-native/onesignal';
 import { ListPage } from './../pages/list/list';
@@ -6,13 +5,13 @@ import { MensagensPage } from './../pages/mensagens/mensagens';
 import { RelatoriosPage } from './../pages/relatorios/relatorios';
 import { AcademicoPage } from './../pages/academico/academico';
 import { CommonProvider } from './../providers/common/common';
-import { CustomLegendaComponent } from './../components/custom-legenda/custom-legenda.component';
+
 import { LoginPage } from './../pages/login/login';
 import { FinanceiroPage } from './../pages/financeiro/financeiro';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { CustomHeaderComponent } from './../components/custom-header/custom-header.component';
+
 import { HomePage } from '../pages/home/home';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -25,13 +24,12 @@ import { MessageDataProvider } from '../providers/message-data/message-data';
 import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
 import { NetworkConnectivityProvider } from '../providers/network-connectivity/network-connectivity';
+import { SessionProvider } from '../providers/session/session';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    CustomHeaderComponent,
-    CustomLegendaComponent,
     HomePage,
     ListPage,
     AcademicoPage,
@@ -39,13 +37,13 @@ import { NetworkConnectivityProvider } from '../providers/network-connectivity/n
     LoginPage,
     MensagensPage,
     MessageDetailsPage,
-   
     RelatoriosPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    
     IonicStorageModule.forRoot({
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -61,7 +59,6 @@ import { NetworkConnectivityProvider } from '../providers/network-connectivity/n
     LoginPage,
     MensagensPage,
     MessageDetailsPage,
- 
     RelatoriosPage
   ],
   providers: [
@@ -70,7 +67,8 @@ import { NetworkConnectivityProvider } from '../providers/network-connectivity/n
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthServiceProvider, CommonProvider, OneSignal,
     OnesignalProvider, MessageDataProvider, Network,
-    NetworkConnectivityProvider
+    NetworkConnectivityProvider,
+    SessionProvider
      
   ]
 })

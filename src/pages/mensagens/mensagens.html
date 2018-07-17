@@ -1,6 +1,13 @@
 <ion-header>
 
-  <custom-header [title]="'Mensagens'"></custom-header>
+  <ion-navbar >
+    <button ion-button menuToggle persistent="true" id="menu">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Mensagens</ion-title>
+  <ion-buttons end></ion-buttons>
+  </ion-navbar>
+  
 
 </ion-header>
 
@@ -15,7 +22,7 @@
           *ngFor="let message of mensagens"
           (click)="contactTapped($event, message)">
 
-  <ion-label>{{message.id}}</ion-label>
+  <ion-label>{{message.titulo}}</ion-label>
   
   </button>
 

@@ -51,7 +51,10 @@ export class MyApp {
       
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.pushs.pushsOnesignal();
+     
+        this.pushs.pushsOnesignal();
+     
+      
       this.netWorkStatus();
 
     });

@@ -1,6 +1,13 @@
 <ion-header>
 
-  <custom-header [title]="'Financeiro'"></custom-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle persistent="true" id="menu">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Financeiro</ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-navbar>
 
 </ion-header>
 
@@ -9,19 +16,17 @@
   <ion-item>
       <ion-label>Selecione o periodo</ion-label>
       <ion-select block  placeholder="Periodo" [(ngModel)]="selected"  (ionChange)="onItemSelection(selected)">
-              <ion-option *ngFor="let item of users" [value]="item.id">{{item.curso}}</ion-option>
+              <ion-option *ngFor="let item of context; let i = index" [value]="i">{{item.descricao}}</ion-option>
       </ion-select>
   </ion-item>    
       <ion-segment  [(ngModel)]="boleto">
         <ion-segment-button value="abertos">
           Abertos
         </ion-segment-button>
-        <ion-segment-button value="vencidos">
-          Vencidos
+        <ion-segment-button value="baixados">
+          Baixdos
         </ion-segment-button>
-        <ion-segment-button value="todos">
-          Todos
-        </ion-segment-button>
+       
       </ion-segment>
     
   
@@ -31,7 +36,7 @@
       <ion-list *ngSwitchCase="'abertos'"  ngSelected="selected" >
       
       <ng-container *ngFor="let bolet of boletos"  >
-        <ng-container *ngIf= "bolet.datavencimento > '02/07/2012' "  >
+        <ng-container *ngIf= "bolet.status == '0' "  >
          <ion-item> 
             <ion-grid>
               <ion-row>  
@@ -55,31 +60,32 @@
       </ng-container>  
       </ion-list>
         
-      <ion-list *ngSwitchCase="'vencidos'">
-        <ion-item>
-       
-          <h2>Luna</h2>
-        </ion-item>
+      <ion-list *ngSwitchCase="'baixados'">
+        <ng-container *ngFor="let bolet of boletos"  >
+          <ng-container *ngIf= "bolet.status == '1' "  >
+           <ion-item> 
+              <ion-grid>
+                <ion-row>  
+                  <ion-col>
+                       <p>Data</p>
+                      <p >{{bolet.datavencimento}}</p>
+                      
+                  </ion-col>
+                  <ion-col>
+                      <p>valor</p>
+                      <p >{{bolet.valor}}</p> 
+                  </ion-col>
+                  <ion-col>
+                    <ion-icon name="checkbox" color="secondary"></ion-icon>
+                  </ion-col>
+                </ion-row>  
+              </ion-grid>
+            </ion-item>
+          </ng-container>
+        </ng-container> 
         
       </ion-list>
   
-      <ion-list *ngSwitchCase="'todos'">
-        <ion-item>
-          
-          <h2>Daffy</h2>
-        </ion-item>
-        <ion-item>
-          
-          <h2>Huey</h2>
-        </ion-item>
-        <ion-item>
-         
-          <h2>Dewey</h2>
-        </ion-item>
-        <ion-item>
-          
-          <h2>Louie</h2>
-        </ion-item>
-      </ion-list>
+     
     </div>
 </ion-content>

@@ -1,46 +1,59 @@
 <ion-header>
-  <custom-header align-title="center" [title]="'Fema App'"></custom-header>
-  </ion-header>
-  
-  <ion-content padding>
-      
-    <ion-grid>
-      <ion-row>
-          <ion-col col-4 text-center>
-              <button ion-button icon-only outline [navPush]="financeiroPage">
-                  <ion-icon name="calculator"></ion-icon>
-                </button>
-                
-          </ion-col>
-          <ion-col col-4 text-center>
-              <button ion-button icon-only outline [navPush]="academicoPage">
-                  <ion-icon name="book"></ion-icon>
-                </button>
-          </ion-col >
-          <ion-col col-4 text-center>
-              <button ion-button icon-only outline [navPush]="mensagensPage">
-                  <ion-icon name="clipboard"></ion-icon>
-                </button>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col col-4 text-center>
-              <button ion-button icon-only color="secondary" outline [navPush]="financeiroPage">
-                  <ion-icon name="arrow-back"></ion-icon>
-                </button>
-          </ion-col>
-          <ion-col col-4 text-center>
-              <button ion-button icon-only color="danger" outline>
-                  <ion-icon name="log-out"></ion-icon>
-                </button>
-          </ion-col>
-          
-      </ion-row>
-    </ion-grid>  
-    
-  </ion-content>
-  <ion-footer>
-    <ion-toolbar>
-      <ion-title>Footer</ion-title>
-    </ion-toolbar>
-  </ion-footer>
+  <ion-navbar>
+    <button ion-button menuToggle persistent="true" id="menu">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Home</ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-navbar>
+
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4 text-center>
+        <button ion-button icon-only outline [navPush]="financeiroPage">
+          <ion-icon name="calculator"></ion-icon>
+        </button>
+        <p>Financeiro</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <button ion-button icon-only outline [navPush]="academicoPage">
+          <ion-icon name="book"></ion-icon>
+        </button>
+        <p>Acadêmico</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <button ion-button icon-only outline [navPush]="mensagensPage">
+          <ion-icon name="mail"></ion-icon>
+        </button>
+        <p>Mensagens</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 text-center>
+        <button ion-button icon-only outline [navPush]="relatoriosPage">
+          <ion-icon name="clipboard"></ion-icon>
+        </button>
+        <p>Relatórios</p>
+      </ion-col>
+
+      <ion-col col-4 text-center>
+        <button (click)="backToWelcome()" ion-button icon-only color="danger" outline>
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+        <p>Sair</p>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

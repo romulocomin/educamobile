@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CustomHeaderComponent } from './custom-header/custom-header.component';
-import { CustomLegendaComponent } from './custom-legenda/custom-legenda.component';
+
+
 @NgModule({
-	declarations: [CustomHeaderComponent,
-    CustomLegendaComponent],
+	declarations: [
+  ],
 	imports: [],
-	exports: [CustomHeaderComponent,
-    CustomLegendaComponent]
+	exports: [
+     ]
 })
 export class ComponentsModule {}

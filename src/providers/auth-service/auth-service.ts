@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -48,12 +46,12 @@ export class AuthServiceProvider {
   }
 
 
-
 getData(type, token) {
     
     return new Promise((resolve, reject) => {
+      let ntoken = '';
      
-     let ntoken = token.replace(/["]/g, "");
+     ntoken = token.replace(/["]/g, "");
      
       const httpOptions = {
         headers: new HttpHeaders({
@@ -74,6 +72,7 @@ getData(type, token) {
         });
     });
   }
+  
 
   getDataPushs(type, token, codusuario) {
     
@@ -91,11 +90,11 @@ getData(type, token) {
           'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT'
         })
       };
-    console.log('urk'+apiUrl+type);
+ 
       this.http.get(apiUrl+type,httpOptions)
         .subscribe((result: any) => {
           resolve(result);
-          console.log('return call1');
+          console.log('return callresolve--'+JSON.stringify(result) );
         },
         (error) => {
           console.log('return call1 error'+JSON.stringify(error));

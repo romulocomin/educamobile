@@ -48,11 +48,12 @@ export class LoginPage {
 
           if (this.resposeData != 2) {
             this.resposeData = JSON.stringify(result[0]['token']);
-
+            console.log("tokenovo"+this.resposeData);
             localStorage.setItem('nome', JSON.stringify(result[0]['nome']));
             localStorage.setItem('token', this.resposeData);
             localStorage.setItem('codusuario', this.userData.codusuario);
-
+            localStorage.setItem('senha', this.userData.senha);
+            
             this.common.closeLoading();
             this.navCtrl.push(HomePage);
 
@@ -75,6 +76,8 @@ export class LoginPage {
       this.userData.codusuario=localStorage.getItem('codusuario');
       this.userData.senha=localStorage.getItem('senha');
       alert("dadosoff"+ this.userData.codusuario+ this.userData.senha);
+      this.navCtrl.push(HomePage);
+
     }
   }
   netWorkStatus(){

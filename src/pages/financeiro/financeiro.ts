@@ -1,11 +1,12 @@
+import { Storage } from '@ionic/storage';
 import { CommonProvider } from './../../providers/common/common';
 import { Md5 } from 'ts-md5/dist/md5';
 import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
 import { HomePage,  } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-
+import { Usuario } from '../../models/usuario-model';
+import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 @IonicPage()
 @Component({
   selector: 'page-financeiro',
@@ -22,34 +23,56 @@ export class FinanceiroPage {
   boletos: any;
   
   recboletos = { "token": "", "codcoligada": "", "idboleto": "", "controle": "" };
+  listboletos = { "token": "", "codcoligada": "", "codcfo": "", "tipousuario": "" };
+  context: any;
   constructor(
     public common: CommonProvider,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public authService: AuthServiceProvider
-    
+    public authService: AuthServiceProvider,
+    private storage: Storage
+   
   ) {
 
     this.boleto = "abertos";
-
+   
 
   }
   ionViewWillEnter() {
     this.boleto = "abertos";
     this.getToday();
-    this.getBoletos();
+  
   }
   ionViewDidLoad() {
-    console.log("fcont"+localStorage.getItem('contexto'));
-   
     
+    this.storage.get('datacontexto').then((data)=>{
+    this.context= JSON.parse(data);
+   
+  });
+
   }
 
-  getBoletos() {
+  public onItemSelection(selection) {
+    if (selection != undefined) {
+      console.log("item selected: " + this.selected);
+      this.listboletos.codcoligada=this.context[this.selected]['codcoligada'];
+      this.listboletos.codcfo=this.context[this.selected]['codcfo'];
+      this.listboletos.tipousuario=this.context[this.selected]['tipousuario'];
+      this.listboletos.token=localStorage.getItem('token').replace(/["]/g, "");
+      this.getBoletos( this.listboletos);
+
+    } else {
+      console.log("no item selected");
+    }
+  }
+
+  getBoletos(listboletos) {
+   
     this.common.presentLoading("Carregamndo informações...");
-    this.authService.getData("listaboletos", localStorage.getItem('token')).then((result) => {
-      this.boletos = result;
-      this.common.closeLoading();
+       
+        this.authService.postData( listboletos ,"listaboletos" ).then((result) => {
+        this.boletos = result;
+    this.common.closeLoading();
     });
 
   }
@@ -83,20 +106,5 @@ export class FinanceiroPage {
   goBack(): void {
     this.navCtrl.setRoot(HomePage);
   }
-
-
-  public onItemSelection(selection) {
-    if (selection != undefined) {
-      console.log("item selected: " + this.selected);
-
-    } else {
-      console.log("no item selected");
-    }
-  }
-
-
-
-
-
 
 }

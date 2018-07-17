@@ -1,18 +1,37 @@
-<!--
-  Generated template for the RelatioriosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
+
   <ion-navbar>
-    <ion-title>relatorios</ion-title>
+    <button ion-button menuToggle persistent="true" id="menu">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Relatórios</ion-title>
+    <ion-buttons end></ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
 
+<ion-content padding>
+  <ng-container *ngFor="let rel of relatorios">
+  
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            
+            <p>{{rel.descricao}}</p>
+           
+            
+          </ion-col>
+         
+          <ion-col>
+            <button ion-button block icon-end outline  (click)="getImpRelatorio(rel.url)" >IMPRIMIR</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  
+</ng-container>
 </ion-content>

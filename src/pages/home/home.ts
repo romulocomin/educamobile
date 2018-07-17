@@ -1,12 +1,18 @@
-import { RelatoriosPage } from './../relatorios/relatorios';
-import { MensagensPage } from './../mensagens/mensagens';
+import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { NavController } from 'ionic-angular';
+import { Usuario } from '../../models/usuario-model';
+import { LoginPage } from '../login/login';
+import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
+import { SessionProvider } from './../../providers/session/session';
 import { AcademicoPage } from './../academico/academico';
 import { FinanceiroPage } from './../financeiro/financeiro';
+import { MensagensPage } from './../mensagens/mensagens';
+import { RelatoriosPage } from './../relatorios/relatorios';
+import { CommonProvider } from '../../providers/common/common';
 
-import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+
+
 
 @Component({
   selector: 'page-home',
@@ -14,7 +20,12 @@ import { LoginPage } from '../login/login';
 })
 
 export class HomePage {
+  data(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
   public avatar;
+  perfildata =[];
+
   academicoPage = AcademicoPage;
   financeiroPage = FinanceiroPage;
   mensagensPage = MensagensPage;   
@@ -23,33 +34,42 @@ export class HomePage {
   profileData: any;
   contexto: any;
   resposeData: any;
+   
+  cont: any;
 
-
-  constructor(public navCtrl: NavController, navParams: NavParams, public authService: AuthServiceProvider
+  constructor(
+    public navCtrl: NavController, 
+    public authService: AuthServiceProvider,
+    public session: SessionProvider,
+    private storage: Storage,
+    private common: CommonProvider
+    
+    
   ) {
-   // this.avatar = navParams.get('eu');
-   // this.profileData = navParams.get('data');
-
+  
   }
   ionViewWillEnter() {
+
     
   }
   ionViewDidLoad() {
     
-    this.getContexto();
+    this.getContext();
+    this.common.closeLoading();
     this.setName();
-
+    
   }
 
-  getContexto() {
-
-    this.authService.getData("contexto", localStorage.getItem('token')).then((result) => {
-      this.contexto = result;
-
-     console.log("contexto"+this.contexto);
-     
+  getContext() {
+  this.common.presentLoading("Carregando dados do usuário");
+    this.authService.getData("contexto", localStorage.getItem('token')).then((data) => {
+      this.contexto =  JSON.stringify(data);
+      console.log("datacontexto"+this.contexto);
+      this.storage.set('datacontexto',this.contexto);
     });
   }
+
+
  setName(){
   
   var element = document.getElementById("nameProfile");
@@ -65,8 +85,7 @@ export class HomePage {
    }
   
   logout(){
-    //Api Token Logout 
-    
+
     localStorage.clear();
     
      setTimeout(()=> this.backToWelcome(), 1000);
